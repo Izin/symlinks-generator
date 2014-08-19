@@ -1,7 +1,6 @@
 #!/bin/sh
 
-DIR="/your/directory"
-EXT="png"
+DIR="/your/theme/folder"
 
 
 # DO NOT TOUCH AFTER!
@@ -10,83 +9,141 @@ EXT="png"
 # Variables
 firstFolder="$(cd ${DIR} && find * -type d -prune | head -1)"
 subFolders="$(cd ${DIR} && find * -type d -prune)"
-bool1=true
-bool2=true
-bool3=true
 
-# Application
-clear
-echo "# ============================================== #"
-echo "#           SYMLINKS GENERATOR  2.4.4            #"
-echo "#                                                #"
-echo "#          <contact@maloblanchard.com>           #"
-echo "# ============================================== #"
-echo ""
-if [ "$(id -u)" = "0" ]; then
-  echo ""
+# Functions
+function err1() {
   echo " /!\ The script must be launched WITHOUT sudo /!\ "
   echo ""
   exit
-fi
-if [ ! -d $DIR ]; then
-  echo ""
-  echo " /!\ The folder « $DIR » doesn't exist /!\ "
+}
+function err2() {
+  echo " /!\ The icons theme folder doesn't exist /!\ "
   echo ""
   exit
-fi
-while true; do
-  while $bool1; do
-    echo -n "1. Icon dir.  : "
-    read iconFolder
-    if [ ! -d ${DIR}/${firstFolder}/${iconFolder} ]; then
-      echo "   /!\ This folder doesn't exist /!\ "
-    else
-      bool1=false
-    fi
-  done
-  while $bool2; do
-    echo -n "2. Icon name  : "
-    read iconName
-    if [ ! -f ${DIR}/${firstFolder}/${iconFolder}/${iconName}.${EXT} ]; then
-      echo "   /!\ This file doesn't exist /!\ "
-    else
-      bool2=false
-    fi
-  done
-  while $bool3; do
-    echo -n "3. Links dir. : "
-    read folder
-    if [ ! -d ${DIR}/${firstFolder}/${folder} ]; then
-      echo "   /!\ This folder doesn't exist /!\ "
-    else
-      bool3=false
-    fi
-  done
-  echo -n "4. Links names: "
-  while read links; do
-    for link in $links; do
-      if [ -f ${DIR}/${firstFolder}/${folder}/${link}.${EXT} ]; then
-        echo "   /!\ The file « ${link}.${EXT} » already exists /!\ "
-        read -p "   Do you want to replace it? [y/n] " key
-        if [ "$key" = "y" ]; then
-          for subFolder in ${subFolders}; do
-            rm ${DIR}/${subFolder}/${folder}/${link}.${EXT} 2>/dev/null
-          done
-        fi
+}
+function err3() {
+  echo "               | -- Can't reach folder, retry --"
+}
+function err4() {
+  echo "               | -- Can't reach file, retry --"
+}
+function err5() {
+  echo "               | -- No link specified, retry --"
+}
+function err6() {
+  echo "               | -- « $1 » already exist --"
+}
+function header() {
+  clear
+  echo "# ============================================== #"
+  echo "#      S Y M L I N K S     G E N E R A T O R     #"
+  echo "# ============================================== #"
+  echo ""
+}
+function checking() {
+  if [[ "$(id -u)" = "0" ]]; then
+    err1
+  fi
+  if [[ ! -d $DIR ]]; then
+    err2
+  fi
+}
+function readIconFolderName() {
+  bool=true
+  echo -n "1. Icon dir.   | "
+  read iconFolder
+  if [[ ! -d ${DIR}/${firstFolder}/${iconFolder} || ${iconFolder} = "" ]]; then
+    err3
+    while $bool; do
+      echo -n "               | "
+      read iconFolder
+      if [[ ! -d ${DIR}/${firstFolder}/${iconFolder} || ${iconFolder} = "" ]]; then
+        err3
+      else
+        bool=false
       fi
-      for subFolder in ${subFolders}; do
-        cd ${DIR}/${subFolder}
-        rm ${folder}/${link}.${EXT} 2>/dev/null
-        ln -s ../${iconFolder}/${iconName}.${EXT} ${folder}/${link}.${EXT}
-      done
     done
-    break
+  fi
+}
+function readIconName() {
+  bool=true
+  echo -n "2. Icon name   | "
+  read iconName
+  if [[ ! -f ${DIR}/${firstFolder}/${iconFolder}/${iconName} ]]; then
+    err4
+    while $bool; do
+      echo -n "               | "
+      read iconName
+      if [[ ! -f ${DIR}/${firstFolder}/${iconFolder}/${iconName} ]]; then
+        err4
+      else
+        bool=false
+      fi
+    done
+  fi
+}
+function readLinksFolderName() {
+  bool=true
+  echo -n "3. Links dir.  | "
+  read folder
+  if [[ ! -d ${DIR}/${firstFolder}/${folder} || ${folder} = "" ]]; then
+    err3
+    while $bool; do
+      echo -n "               | "
+      read folder
+      if [[ ! -d ${DIR}/${firstFolder}/${folder} || ${folder} = "" ]]; then
+        err3
+      else
+        bool=false
+      fi
+    done
+  fi
+}
+function readLinksNames() {
+  bool=true
+  echo -n "4. Links name. | "
+  read linksNames
+  if [[ ${linksNames} = "" ]]; then
+    err5
+    while $bool; do
+      echo -n "               | "
+      read linksNames
+      if [[ ${linksNames} = "" ]]; then
+        err5
+      else
+        bool=false
+      fi
+    done
+  fi
+}
+
+# Application
+header
+checking
+while true; do
+  readIconFolderName
+  readIconName
+  readLinksFolderName
+  readLinksNames
+  for link in $linksNames; do
+    if [ -f ${DIR}/${firstFolder}/${folder}/${link} ]; then
+      err6 ${link}
+      read -p "               | Replace it? [y/n] " key
+      if [ "$key" = "y" ]; then
+        for subFolder in ${subFolders}; do
+          rm ${DIR}/${subFolder}/${folder}/${link} 2>/dev/null
+        done
+      fi
+    fi
+    for subFolder in ${subFolders}; do
+      cd ${DIR}/${subFolder}
+      rm ${folder}/${link} 2>/dev/null
+      ln -s ../${iconFolder}/${iconName} ${folder}/${link}
+    done
   done
   echo ""
   echo "# ---------------------------------------------- #"
   echo ""
-  bool1=true
-  bool2=true
-  bool3=true
 done
+
 exit
