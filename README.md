@@ -2,8 +2,10 @@
 
 ![Banner](https://github.com/maloblanchard/symlinks-generator/blob/dev/banner.jpg "Symlinks Generator")
 
-I created this script to help Linux iconset makers who want's to quickly
-generate symbolic links for their new icons.
+I originally created this to help [fsvh](https://github.com/fsvh) making it's
+[Captiva Icon Theme](https://github.com/captiva-project/captiva-icon-theme).
+This script prompts the user for what icon he wants to create symlinks, and
+create the symlinks in the specified directory for every dimensions (16, 24...).
 
 
 ###Use
