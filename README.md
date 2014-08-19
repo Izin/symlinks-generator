@@ -8,11 +8,8 @@ generate symbolic links for their new icons.
 
 
 ###Use
-1. Open the .sh with your favorite editor and change the value for DIR and EXT.
-2. Open the .sh in a terminal with this command:
-```bash
-bash symlinks-generator.sh
-```
+1. Open the .sh with your favorite editor and change the value for DIR
+2. Open the .sh in a terminal
 
 
 ###Required
