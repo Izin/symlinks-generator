@@ -1,18 +1,12 @@
 Symlinks Generator
 ==================
 
-This script was create to help Linux iconset makers creating symbolic links
-quickly and easely.
-
-###Installation
-```bash
-cd your_folder
-git clone
-```
+I created this script to help Linux iconset makers who want's to quickly
+generate symbolic links for their new icons.
 
 ###Use
-Open the .sh with your favorite editor and change the value for DIR and EXT.
-Then open it in a terminal with this command:
+1. Open the .sh with your favorite editor and change the value for DIR and EXT.
+2. Open the .sh in a terminal with this command:
 ```bash
 bash symlinks-generator.sh
 ```
