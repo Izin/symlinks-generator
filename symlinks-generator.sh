@@ -1,23 +1,21 @@
-#!/bin/sh
+#!/bin/bash
 
 DIR="/your/theme/folder"
 
-
-# DO NOT TOUCH AFTER!
-# --------------------------------------------------------------------------- #
-
 # Variables
+# -----------------------------------------------------------------------------
 firstFolder="$(cd ${DIR} && find * -type d -prune | head -1)"
 subFolders="$(cd ${DIR} && find * -type d -prune)"
 
 # Functions
+# -----------------------------------------------------------------------------
 function err1() {
-  echo " /!\ The script must be launched WITHOUT sudo /!\ "
+  echo "  /!\ The script must be launched WITHOUT sudo /!\ "
   echo ""
   exit
 }
 function err2() {
-  echo " /!\ The icons theme folder doesn't exist /!\ "
+  echo "  /!\ The icons theme folder doesn't exist /!\ "
   echo ""
   exit
 }
@@ -36,7 +34,10 @@ function err6() {
 function header() {
   clear
   echo "# ============================================== #"
-  echo "#      S Y M L I N K S     G E N E R A T O R     #"
+  echo "#     S Y M L I N K S     G E N E R A T O R      #"
+  echo "#     --------------------------------------     #"
+  echo "#     Author  |  Malo Blanchard                  #"
+  echo "#     Email   |  contact@maloblanchard.com       #"
   echo "# ============================================== #"
   echo ""
 }
@@ -117,7 +118,8 @@ function readLinksNames() {
   fi
 }
 
-# Application
+# Main
+# -----------------------------------------------------------------------------
 header
 checking
 while true; do
@@ -145,5 +147,4 @@ while true; do
   echo "# ---------------------------------------------- #"
   echo ""
 done
-
 exit
