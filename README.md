@@ -42,6 +42,8 @@ Don't hesitate to [contact me](http://maloblanchard.com/contact).
 
 ###Changelog
 ```
+v2.6 (11/07/2014)
+ - New version, working with bash instead of sh
 v2.5 (08/19/2014)
  - Complete rewrite of the code
  - The script now checks if variables are empty
