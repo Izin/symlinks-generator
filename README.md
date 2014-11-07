@@ -1,19 +1,18 @@
-#Symlinks Generator 2.5
+#Symlinks Generator
 
-![Banner](https://github.com/maloblanchard/symlinks-generator/blob/dev/banner.jpg "Symlinks Generator")
+![Banner](banner.jpg "Symlinks Generator")
 
 I originally created this to help [fsvh](https://github.com/fsvh) making it's
 [Captiva Icon Theme](https://github.com/captiva-project/captiva-icon-theme).
-This script prompts the user for what icon he wants to create symlinks, and
+Symlinks Generator script prompts the user for what icon he wants to create symlinks, and
 create the symlinks in the specified directory for every dimensions (16, 24...).
 
-
 ###Use
-1. Open the .sh with your favorite editor and change the value for DIR
-2. Open the .sh in a terminal
+1. Change the value for "DIR" in the script
+2. bash symlinks-generator.sh
 
 
-###Required
+###Requirements
 Your icon folder tree has to respect this structure (example):
 ```
 ├── YourThemeFolder
@@ -37,17 +36,17 @@ Your icon folder tree has to respect this structure (example):
 ```
 
 
-###Bugs
-If you find a bug please [contact me](http://maloblanchard.com/contact).
+###Ideas, Bugs
+Don't hesitate to [contact me](http://maloblanchard.com/contact).
 
 
 ###Changelog
 ```
-v2.5
+v2.5 (08/19/2014)
  - Complete rewrite of the code
- - The script checks if variables are empty
+ - The script now checks if variables are empty
  - More understandable variables names
-v2.4
+v2.4 (08/16/2014)
  - New interface
- - Fixing bad symlink path
+ - [Fix] bad symlink path
 ```
