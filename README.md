@@ -19,7 +19,7 @@ bash symlinks-generator.sh
 
 
 ###Requirements
-Your icon folder tree has to respect this structure (example):
+Your icon folder tree must follow this structure (example):
 ```
 ├── YourThemeFolder
 │   ├── 16x16
