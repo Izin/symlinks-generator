@@ -4,12 +4,18 @@
 
 I originally created this to help [fsvh](https://github.com/fsvh) making it's
 [Captiva Icon Theme](https://github.com/captiva-project/captiva-icon-theme).
-Symlinks Generator script prompts the user for what icon he wants to create symlinks, and
-create the symlinks in the specified directory for every dimensions (16, 24...).
+Symlinks Generator script prompts the user for the icon he wants to create
+symlinks, and then create symlinks in the specified directory for every
+dimensions (16, 24...).
+
 
 ###Use
-1. Change the value for "DIR" in the script
-2. bash symlinks-generator.sh
+```
+git clone git@github.com:maloblanchard/symlinks-generator.git
+cd symlinks-generator/
+# Change the value for "DIR" in the script
+bash symlinks-generator.sh
+```
 
 
 ###Requirements
@@ -42,13 +48,13 @@ Don't hesitate to [contact me](http://maloblanchard.com/contact).
 
 ###Changelog
 ```
-v2.6 (11/07/2014)
+v2.6 (2014-11-07)
  - New version, working with bash instead of sh
-v2.5 (08/19/2014)
+v2.5 (2014-08-19)
  - Complete rewrite of the code
  - The script now checks if variables are empty
  - More understandable variables names
-v2.4 (08/16/2014)
+v2.4 (2014-08-16)
  - New interface
  - [Fix] bad symlink path
 ```
