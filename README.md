@@ -42,10 +42,6 @@ Your icon folder tree must follow this structure (example):
 ```
 
 
-###Ideas, Bugs
-Don't hesitate to [contact me](http://maloblanchard.com/contact).
-
-
 ###Changelog
 ```
 v2.6 (2014-11-07)
